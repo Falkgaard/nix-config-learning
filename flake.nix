@@ -47,15 +47,15 @@
    
    outputs = { ... } @inputs:
    let
-      # A simple library that reduces boilerplate code.
-      myLib  = import ./my-lib/default.nix { inherit inputs; };
+      # Import the support library (to reduce boilerplate):
+      support-lib = import ./libraries/support/default.nix { inherit inputs; };
       # system = "x86_64-linux";
       # pkgs   = nixpkgs.legacyPackages.${system};
    in
    with myLib; {
       
       nixosConfigurations = {
-         laptop = mkSystem ./host/laptop/configuration.nix;
+         laptop = mkSystem ./hosts/laptop/configuration.nix;
          # NOTE: Add more host system configurations here when needed.
       };
       
