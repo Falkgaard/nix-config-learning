@@ -5,8 +5,8 @@
 #    A simple helper library with the purpose of reducing boiler plate code.
 #
 {inputs}: let
-   myLib   = (import ./default.nix) { inherit inputs; };
-   outputs = inputs.self.outputs;
+   support-lib = (import ./default.nix) { inherit inputs; };
+   outputs     = inputs.self.outputs;
 in rec {
    # ======================= Package Helpers ======================== #
    
@@ -17,7 +17,7 @@ in rec {
    mkSystem = config:
       inputs.nixpkgs.lib.nixosSystem {
          specialArgs = {
-            inherit inputs outputs myLib;
+            inherit inputs outputs support-lib;
          };
          modules = [
             config
@@ -29,7 +29,7 @@ in rec {
       inputs.home-manager.lib.homeManagerConfiguration {
          pkgs = pkgsFor sys;
          extraSpecialArgs = {
-            inherit inputs myLib outputs;
+            inherit inputs support-lib outputs;
          };
          modules = [
             config

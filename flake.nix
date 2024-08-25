@@ -52,7 +52,7 @@
       # system = "x86_64-linux";
       # pkgs   = nixpkgs.legacyPackages.${system};
    in
-   with myLib; {
+   with support-lib; {
       
       nixosConfigurations = {
          laptop = mkSystem ./hosts/laptop/configuration.nix;
