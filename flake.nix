@@ -1,99 +1,90 @@
+# ~/NixOS/flake.nix
+#
+# TODO: Describe.
 {
-  # ================================================================ #
-  # =                           WELCOME!                           = #
-  # ================================================================ #
-
-  description = "Yurii's NixOS configuration";
-
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    xremap-flake.url = "github:xremap/nix-flake";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-alien = {
-      url = "github:thiagokokada/nix-alien";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-colors.url = "github:misterio77/nix-colors";
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    prism = {
-      url = "github:IogaMaster/prism";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    nixpkgs-wivrn = {
-      url = "github:nixos/nixpkgs/efdeeae66101269fdcb3624ed315f6cfbf08ca95";
-      # url = "github:nixos/nixpkgs/19e0a58bcc6f1df16c48cdbac7d159d0e6fd9a00";
-    };
-
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-
-    stylix.url = "github:danth/stylix";
-
-    ags.url = "github:Aylur/ags";
-
-    persist-retro.url = "github:Geometer1729/persist-retro";
-  };
-
-  outputs = {...} @ inputs: let
-    # super simple boilerplate-reducing
-    # lib with a bunch of functions
-    myLib = import ./myLib/default.nix {inherit inputs;};
-  in
-    with myLib; {
+   description = "NixOS config flake";
+   
+   
+   
+   inputs = {
+      nixpkgs.url                = "github:nixos/nixpkgs/nixos-unstable";
+      
+      home-manager = {
+         url                     = "github:nix-community/home-manager";
+         inputs.nixpkgs.follows  = "nixpkgs";
+      };
+      
+      nix-index-database = {
+         url                     = "github:Mic92/nix-index-database";
+         inputs.nixpkgs.follows  = "nixpkgs";
+      };
+      
+      nix-colors.url             = "github:misterio77/nix-colors";
+      
+      hyprland.url               = "github:hyprwm/hyprland";
+      #hyprland = {
+      #   type                    = "git";
+      #   url                     = "https://github.com/hyprwm/Hyprland";
+      #   submodules              = true;
+      #};
+      
+      hyprland-plugins = {
+         url                     = "github:hyprwm/hyprland-plugins";
+         inputs.hyprland.follows = "hyprland";
+      };
+      
+      # TODO: Look into what else might be worth adding, e.g:
+      #
+      #    disko
+      #    impermanence
+      #    stylix
+      #    firefox-addons
+      #    nix-alien
+      #    ...
+   }; # end-of: `inputs`
+   
+   
+   
+   outputs = { ... } @inputs:
+   let
+      # A simple library that reduces boilerplate code.
+      myLib  = import ./my-lib/default.nix { inherit inputs; };
+      # system = "x86_64-linux";
+      # pkgs   = nixpkgs.legacyPackages.${system};
+   in
+   with myLib; {
+      
       nixosConfigurations = {
-        # ===================== NixOS Configurations ===================== #
-
-        laptop = mkSystem ./hosts/laptop/configuration.nix;
-        work = mkSystem ./hosts/work/configuration.nix;
-        vps = mkSystem ./hosts/vps/configuration.nix;
-        liveiso = mkSystem ./hosts/liveiso/configuration.nix;
+         laptop = mkSystem ./host/laptop/configuration.nix;
+         # NOTE: Add more host system configurations here when needed.
       };
-
+      
       homeConfigurations = {
-        # ================ Maintained home configurations ================ #
-
-        "yurii@laptop" = mkHome "x86_64-linux" ./hosts/laptop/home.nix;
-        "yurii@work" = mkHome "x86_64-linux" ./hosts/work/home.nix;
-
-        # ========================= Discontinued ========================= #
-        # This one doesn't work. Left it in case I ever want to use it again
-
-        "yurii@osxvm" = mkHome "x86_64-darwin" ./hosts/osxvm/home.nix;
+         "falk@laptop" = mkHome "x86_64-linux" ./hosts/laptop/home.nix;
+         # NOTE: Add more host home configurations here when needed.
       };
+      
+      homeManagerModules.default = ./modules/home-manager;
+      nixosModules.default       = ./modules/nixos;
+   };
+   
+} # end-of: <module>
 
-      homeManagerModules.default = ./homeManagerModules;
-      nixosModules.default = ./nixosModules;
-    };
-}
+# NOTE: Old outputs configuration.
+# TODO: Remove when the above is shown to work.
+#
+#   outputs = { self, nixpkgs, home-manager, hyprland, ... } @inputs:
+#   let
+#      system = "x86_64-linux";
+#      pkgs   = nixpkgs.legacyPackages.${system};
+#   in {
+#      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+#         specialArgs = { inherit inputs; };
+#         modules     = [
+#            inputs.home-manager.nixosModules.default
+#            #{ wayland.windowManager.hyprland.enable = true; }
+#            ./hosts/default/configuration.nix
+#         ];
+#      };
+#   };
+
