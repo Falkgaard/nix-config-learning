@@ -1,7 +1,12 @@
-{inputs, ...}: {
-  programs.git = {
-    enable = true;
-    userEmail = "yurii@goxore.com";
-    userName = "yurii";
-  };
+# ~/NixOS/modules/home/features/git/default.nix
+{
+   inputs,
+   ...
+}:{
+   programs.git = {
+      enable    = true;
+      userEmail = "falkgaard@falkgaard.com";
+      userName  = "falkgaard";
+   };
 }
+
