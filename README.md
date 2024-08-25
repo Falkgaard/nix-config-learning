@@ -1,6 +1,6 @@
 # Description
 
-A NixOS configuration that uses a [Nix flake](ttps://nixos.wiki/wiki/flakes) and [Home Manager](https://nixos.wiki/wiki/Home_Manager) inspired by [Vimjoyer](https://www.youtube.com/@vimjoyer)'s great YouTube videos and example configs as well as [No Boilerplate](https://www.youtube.com/@NoBoilerplate). Still very much a work in progress!
+A NixOS configuration that uses a [Nix flake](https://nixos.wiki/wiki/flakes) and [Home Manager](https://nixos.wiki/wiki/Home_Manager) inspired by [Vimjoyer](https://www.youtube.com/@vimjoyer)'s great YouTube videos and example configs as well as [No Boilerplate](https://www.youtube.com/@NoBoilerplate). Still very much a work in progress!
 
 # Structure
 
