@@ -1,20 +1,21 @@
-# ~/NixOS/modules/home-manager/features/tui/emulator-kitty.nix
+# ./modules/home/features/kitty/default.nix
 {
    pkgs,
    configs,
    ...
 }:{
    programs.kitty {
+      
       enable = true;
-
+      
       # environment ... TODO
       # extraConfig ... TODO
       # package     ... TODO
       # keybindings ... TODO
       # theme       ... TODO
-
+      
       font.name = "FiraCode";
-
+      
       settings = {
          # Fonts:
             #font_family                  =              "JetBrains Mono";

@@ -1,10 +1,11 @@
-# ~/NixOS/modules/home-manager/features/tui/editor-neovim.nix
+# ./modules/home/features/nvim/default.nix
 {
    pkgs,
    configs,
    inputs,
    ...
 }:{
+   
    
    # NOTE: Overlays are only necessary if adding plugins manually.
    #
@@ -20,7 +21,6 @@
    #     })
    #   ];
    # };
-   
    
    
    myHomeManager.programs.neovim =

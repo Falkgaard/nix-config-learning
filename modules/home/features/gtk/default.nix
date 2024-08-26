@@ -1,15 +1,17 @@
+# ./modules/home/features/gtk/default.nix
 {
-  pkgs,
-  config,
-  ...
+   pkgs,
+   config,
+   ...
 }: let
-  gruvboxPlus = import ./gruvbox-plus.nix {inherit pkgs;};
+   gruvboxPlus = import ./gruvbox-plus.nix {inherit pkgs;};
 in {
-  home.file = {
-    ".local/share/icons/GruvboxPlus".source = "${gruvboxPlus}";
-  };
+   home.file = {
+     ".local/share/icons/GruvboxPlus".source = "${gruvboxPlus}";
+   };
+   
+   gtk.enable            = true;
+   gtk.iconTheme.package = gruvboxPlus;
+   gtk.iconTheme.name    = "GruvboxPlus";
+} # end-of: <module>
 
-  gtk.enable = true;
-  gtk.iconTheme.package = gruvboxPlus;
-  gtk.iconTheme.name = "GruvboxPlus";
-}

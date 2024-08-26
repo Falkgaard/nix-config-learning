@@ -1,11 +1,11 @@
-# ~/NixOS/modules/home-manager/gui/firefox.nix
+# ./modules/home/features/firefox/default.nix
 {
    pkgs,
    inputs,
    config,
    lib,
    ...
-}: {
+}:{
    programs.firefox = {
       
       enable = true;

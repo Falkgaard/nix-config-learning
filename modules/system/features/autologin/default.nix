@@ -1,25 +1,29 @@
+# ./modules/system/features/autologin/default.nix
+#
+# TODO: Describe.
 {
-  pkgs,
-  lib,
-  config,
-  ...
+   pkgs,
+   lib,
+   config,
+   ...
 }: let
-  cfg = config.myNixOS.autologin;
+   cfg = config.myOS.autologin;
 in {
-  options.myNixOS.autologin = {
-    user = lib.mkOption {
-      default = null;
-      description = ''
-        username to autologin
+   options.myOS.autologin = {
+      user = lib.mkOption {
+         default     = null;
+         description = ''
+            Username to autologin.
+         '';
+      };
+   };
+   
+   config = lib.mkIf (cfg.user != null) {
+      programs.bash.shellInit = ''
+         if [ "$(tty)" = "/dev/tty1" ]; then
+            exec Hyprland &> /dev/null
+         fi
       '';
-    };
-  };
+   };
+} # end-of: <module>
 
-  config = lib.mkIf (cfg.user != null) {
-    programs.bash.shellInit = ''
-      if [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland &> /dev/null
-      fi
-    '';
-  };
-}

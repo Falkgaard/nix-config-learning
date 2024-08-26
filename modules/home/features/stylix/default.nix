@@ -1,10 +1,11 @@
+# ./modules/home/features/stylix/default.nix
 {
-  pkgs,
-  lib,
-  ...
+   pkgs,
+   lib,
+   ...
 }: {
-  # stylix.base16Scheme = ./theme.yaml;
-  # stylix.base16Scheme = {
+  #stylix.base16Scheme = ./theme.yaml;
+  #stylix.base16Scheme = {
   #   base00 = "282828"; # ----
   #   base01 = "3c3836"; # ---
   #   base02 = "504945"; # --
@@ -21,12 +22,12 @@
   #   base0D = "83a598"; # blue
   #   base0E = "d3869b"; # purple
   #   base0F = "d65d0e"; # brown
-  # };
+  #};
+   
+  #stylix.image = ./prism/wallpapers/gruvbox-mountain-village.png; # TODO
+   
+   stylix.targets.waybar.enable = false;
+   stylix.targets.rofi.enable   = false;
+   stylix.autoEnable            = true;
+} # end-of: <module>
 
-  # stylix.image = ./prism/wallpapers/gruvbox-mountain-village.png;
-
-  stylix.targets.waybar.enable = false;
-  stylix.targets.rofi.enable = false;
-
-  stylix.autoEnable = true;
-}

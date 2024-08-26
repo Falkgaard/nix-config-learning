@@ -1,3 +1,4 @@
+# ./modules/home/features/fish/default.nix
 {
    pkgs,
    configs,

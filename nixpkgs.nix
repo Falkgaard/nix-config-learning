@@ -1,4 +1,4 @@
-# ~/NixOS/nixpkgs.nix
+# ./nixpkgs.nix
 #
 # TODO: Describe.
 let

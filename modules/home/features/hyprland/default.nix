@@ -1,13 +1,4 @@
-# ~/NixOS/modules/home-manager/bundles/desktops/hyprland.nix
-
-
-
-
-
-
-
-
-# ~/NixOS/modules/home-manager/features/gui/desktop/hyprland.nix
+# ./modules/home/features/hyprland/default.nix
 {
   pkgs,
   config,

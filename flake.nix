@@ -1,4 +1,4 @@
-# ~/NixOS/flake.nix
+# ./flake.nix
 #
 # TODO: Describe.
 {

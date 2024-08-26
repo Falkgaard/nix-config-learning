@@ -1,4 +1,4 @@
-# ~/NixOS/modules/home/features/git/default.nix
+# ./modules/home/features/git/default.nix
 {
    inputs,
    ...
@@ -8,5 +8,5 @@
       userEmail = "falkgaard@falkgaard.com";
       userName  = "falkgaard";
    };
-}
+} # end-of: <module>
 

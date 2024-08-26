@@ -1,4 +1,4 @@
-# ~/NixOS/shell.nix
+# ./shell.nix
 #
 # TODO: Describe. (I think it's to setup prerequisites for a fresh install?)
 {
