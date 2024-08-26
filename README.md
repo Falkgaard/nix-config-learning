@@ -32,6 +32,8 @@ Then there are the following three directories:
 
 * `./modules/home/features/` contains home feature modules, these are generally stand-alone modules. (E.g. firefox)
 
+* `./resources` contains resource data such as background images, wallpapers, etc.
+
 * **TODO:** Later on `./modules/home/services/` and `./modules/home/services/` will be added.
 
 Generally, the host configurations will rely on modules for almost all features. This way, modules can easily be re-used by various hosts with their necessary configuration of the features and bundles (when the defaults do not suffice) inside of their respective host configurations.
