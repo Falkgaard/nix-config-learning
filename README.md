@@ -52,6 +52,6 @@ Generally, the host configurations will rely on modules for almost all features.
 
 4. `./hosts/X/home.nix`
 
-5. `./modules/system/bundles/X.nix` and `./modules/home/bundles.nix`
+5. `./modules/system/bundles/X.nix` and `./modules/home/bundles/X.nix`
 
 6. `./modules/system/features/X.nix` and `./modules/home/features/X.nix`
