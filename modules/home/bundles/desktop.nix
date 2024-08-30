@@ -19,10 +19,10 @@
    
    config = {
       
-      myHomeManager.zathura.enable  = lib.mkDefault true;
-      myHomeManager.rofi.enable     = lib.mkDefault true;
-      myHomeManager.kitty.enable    = lib.mkDefault true;
-      myHomeManager.xremap.enable   = lib.mkDefault true;
+      myHomeManager.features.zathura.enable  = lib.mkDefault true;
+      myHomeManager.features.rofi.enable     = lib.mkDefault true;
+      myHomeManager.features.kitty.enable    = lib.mkDefault true;
+      myHomeManager.features.xremap.enable   = lib.mkDefault true;
       
       
       # myHomeManager.gtk.enable = lib.mkDefault true;

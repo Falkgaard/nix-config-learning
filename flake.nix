@@ -64,8 +64,8 @@
          # NOTE: Add more host home configurations here when needed.
       };
       
-      homeManagerModules.default = ./modules/home-manager;
-      nixosModules.default       = ./modules/nixos;
+      homeManagerModules.default = ./modules/home;
+      nixosModules.default       = ./modules/system;
    };
    
 } # end-of: <module>

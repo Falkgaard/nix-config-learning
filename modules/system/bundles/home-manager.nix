@@ -11,13 +11,13 @@
 let
    cfg = config.myOS;
 in {
+   
    options.myOS = {
       userName = lib.mkOption {
          default     = "falk";
-         description = ''
-            Username
-         '';
+         description = ''Username'';
       };
+      
       
       userConfig = lib.mkOption {
          # TODO: Look into these option values! Redundant left-overs?
@@ -27,6 +27,7 @@ in {
          '';
       };
       
+      
       userNixosSettings = lib.mkOption {
          default     = {};
          description = ''
@@ -35,18 +36,23 @@ in {
       };
    };
    
+   
+   
    config = {
-      # TODO: Set with Terminal bundle in `~/NixOS/hosts/*/home.nix`?
+      
+      # TODO: Set with Terminal bundle in `./hosts/*/home.nix`?
       programs.zsh.enable  = false;
       programs.fish.enable =  true;
       
-      # TODO: Set with Desktop bundle in `~/NixOS/hosts/*/home.nix`?
+      
+      # TODO: Set with Desktop bundle in `./hosts/*/home.nix`?
       programs.hyprland.enable = cfg.hyprland.enable;
       services.xserver         = lib.mkIf cfg.hyprland.enable {
          displayManager = {
             defaultSession = "hyprland"; 
          };
       };
+      
       
       home-manager = {
          useGlobalPkgs   = true;
@@ -57,6 +63,7 @@ in {
             inherit support-lib;
             outputs = inputs.self.outputs;
          };
+         
          users = {
             ${cfg.userName} = {...}: {
                imports = [
@@ -67,14 +74,16 @@ in {
          };
       };
       
+      
       users.users.${cfg.userName} = {
          isNormalUser    = true;
          initialPassword = "12345";
          description     = cfg.userName;
-         shell           = pkgs.fish; # TODO: Set with Terminal bundle in `~/NixOS/hosts/*/home.nix`?
+         shell           = pkgs.fish;
          extraGroups     = [ "libvirtd" "networkmanager" "wheel" ];
       }
       // cfg.userNixosSettings;
    };
+   
 } # end-of: <module>
 

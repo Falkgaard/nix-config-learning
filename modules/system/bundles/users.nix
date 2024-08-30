@@ -13,6 +13,7 @@
 let
    cfg = config.myOS;
 in {
+   
    options.myOS.home-users = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
          options = {
@@ -21,6 +22,7 @@ in {
                default = ~/NixOS/home-manager/work.nix;
                example = "eDP-1";
             };
+            
             userSettings = lib.mkOption {
                default = {};
                example = "{}";
@@ -30,11 +32,13 @@ in {
       default = {};
    };
    
+   
+   
    config = {
       
       # TODO: Set with Terminal bundle in `~/NixOS/hosts/*/home.nix`?
-      programs.zsh.enable  = false;
-      programs.fish.enable =  true;
+      programs.fish.enable = true;
+      
       
       # TODO: Set with Desktop bundle in `~/NixOS/hosts/*/home.nix`?
       programs.hyprland.enable = cfg.hyprland.enable;
@@ -43,6 +47,7 @@ in {
             defaultSession = "hyprland";
          };
       };
+      
       
       home-manager = {
         useGlobalPkgs    = true;
@@ -63,12 +68,13 @@ in {
         )( config.myOS.home-users );
       };
       
+      
       users.users = builtins.mapAttrs(
          name : user: {
             isNormalUser    = true;
             initialPassword = "12345";
             description     = "";
-            shell           = pkgs.fish; # TODO: Set with Terminal bundle in `~/NixOS/hosts/*/home.nix`?
+            shell           = pkgs.fish;
             extraGroups     = [ "libvirtd" "networkmanager" "wheel" ];
          }
          // user.userSettings

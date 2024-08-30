@@ -38,3 +38,20 @@ Then there are the following three directories:
 
 Generally, the host configurations will rely on modules for almost all features. This way, modules can easily be re-used by various hosts with their necessary configuration of the features and bundles (when the defaults do not suffice) inside of their respective host configurations.
 
+
+
+# Order of config processing:
+
+(TODO: Verify that this is the order!)
+
+1. `./flake.nix`
+
+2. `./hosts/X/configuration.nix`
+
+3. `./hosts/X/hardware-configuration.nix`
+
+4. `./hosts/X/home.nix`
+
+5. `./modules/system/bundles/X.nix` and `./modules/home/bundles.nix`
+
+6. `./modules/system/features/X.nix` and `./modules/home/features/X.nix`

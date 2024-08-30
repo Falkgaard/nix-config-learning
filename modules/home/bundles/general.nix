@@ -15,16 +15,16 @@
    };
     
     
-   myHomeManager.fish.enable       = lib.mkDefault true;
-   myHomeManager.git.enable        = lib.mkDefault true;
-   myHomeManager.stylix.enable     = lib.mkDefault true;
-  #myHomeManager.lf.enable         = lib.mkDefault true;
-  #myHomeManager.yazi.enable       = lib.mkDefault true;
-  #myHomeManager.nix-extra.enable  = lib.mkDefault true;
-  #myHomeManager.btop.enable       = lib.mkDefault true;
-  #myHomeManager.nix-direnv.enable = lib.mkDefault true;
-  #myHomeManager.nix.enable        = lib.mkDefault true;
-  #myHomeManager.bottom.enable     = lib.mkDefault true;
+   myHomeManager.features.fish.enable       = lib.mkDefault true;
+   myHomeManager.features.git.enable        = lib.mkDefault true;
+   myHomeManager.features.stylix.enable     = lib.mkDefault true;
+  #myHomeManager.features.lf.enable         = lib.mkDefault true;
+  #myHomeManager.features.yazi.enable       = lib.mkDefault true;
+  #myHomeManager.features.nix-extra.enable  = lib.mkDefault true;
+  #myHomeManager.features.btop.enable       = lib.mkDefault true;
+  #myHomeManager.features.nix-direnv.enable = lib.mkDefault true;
+  #myHomeManager.features.nix.enable        = lib.mkDefault true;
+  #myHomeManager.features.bottom.enable     = lib.mkDefault true;
    
    
    programs.home-manager.enable = true;
