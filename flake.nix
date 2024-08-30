@@ -7,27 +7,33 @@
    
    
    inputs = {
+      # NixOS Unstable channel:
       nixpkgs.url                = "github:nixos/nixpkgs/nixos-unstable";
-      
+
+      # Home Manager:
       home-manager = {
          url                     = "github:nix-community/home-manager";
          inputs.nixpkgs.follows  = "nixpkgs";
       };
-      
+
+      # Nix Index DB:
       nix-index-database = {
          url                     = "github:Mic92/nix-index-database";
          inputs.nixpkgs.follows  = "nixpkgs";
       };
-      
+
+      # Nix Colors:
       nix-colors.url             = "github:misterio77/nix-colors";
-      
+
+      # Hyprland:
       hyprland.url               = "github:hyprwm/hyprland";
-      #hyprland = {
-      #   type                    = "git";
-      #   url                     = "https://github.com/hyprwm/Hyprland";
-      #   submodules              = true;
-      #};
-      
+      # hyprland = {
+      #    type                    = "git";
+      #    url                     = "https://github.com/hyprwm/Hyprland";
+      #    submodules              = true;
+      # };
+
+      # Hyprland Plugins:
       hyprland-plugins = {
          url                     = "github:hyprwm/hyprland-plugins";
          inputs.hyprland.follows = "hyprland";
@@ -45,7 +51,7 @@
    
    
    
-   outputs = { ... } @inputs:
+   outputs = { ... } @inputs:   # OLD: { self, nixpkgs, home-manager, hyprland, ... } @inputs:
    let
       # Import the support library (to reduce boilerplate):
       support-lib = import ./libraries/support/default.nix { inherit inputs; };
@@ -64,8 +70,8 @@
          # NOTE: Add more host home configurations here when needed.
       };
       
-      homeManagerModules.default = ./modules/home;
-      nixosModules.default       = ./modules/system;
+      homeManagerModules.default = ./modules/home/;
+      nixosModules.default       = ./modules/system/;
    };
    
 } # end-of: <module>
@@ -87,4 +93,3 @@
 #         ];
 #      };
 #   };
-
