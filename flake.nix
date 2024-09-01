@@ -1,6 +1,7 @@
 # ./flake.nix
 #
-# TODO: Describe.
+# Using Nix flakes let's us make our configuration reproducable since the
+# versions of any dependencies will get pinned to a generated `flake.lock` file.
 {
    description = "NixOS config flake";
    
