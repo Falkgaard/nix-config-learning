@@ -17,14 +17,14 @@
          inputs.nixpkgs.follows  = "nixpkgs";
       };
 
-      # Nix Index DB:
-      nix-index-database = {
-         url                     = "github:Mic92/nix-index-database";
-         inputs.nixpkgs.follows  = "nixpkgs";
-      };
+      ## # Nix Index DB:
+      ## nix-index-database = {
+      ##    url                     = "github:Mic92/nix-index-database";
+      ##    inputs.nixpkgs.follows  = "nixpkgs";
+      ## };
 
-      # Nix Colors:
-      nix-colors.url             = "github:misterio77/nix-colors";
+      ## # Nix Colors:
+      ## nix-colors.url             = "github:misterio77/nix-colors";
 
       # Hyprland:
       hyprland.url               = "github:hyprwm/hyprland";
@@ -34,11 +34,11 @@
       #    submodules              = true;
       # };
 
-      # Hyprland Plugins:
-      hyprland-plugins = {
-         url                     = "github:hyprwm/hyprland-plugins";
-         inputs.hyprland.follows = "hyprland";
-      };
+      ## # Hyprland Plugins:
+      ## hyprland-plugins = {
+      ##    url                     = "github:hyprwm/hyprland-plugins";
+      ##    inputs.hyprland.follows = "hyprland";
+      ## };
       
       # TODO: Look into what else might be worth adding, e.g:
       #
@@ -51,13 +51,12 @@
    }; # end-of: `inputs`
    
    
-   
-   outputs = { ... } @inputs:   # OLD: { self, nixpkgs, home-manager, hyprland, ... } @inputs:
+   # OLD: { self, nixpkgs, home-manager, hyprland, ... } @inputs:
+   outputs = inputs@{ ... }:
    let
       # Import the support library (to reduce boilerplate):
       support-lib = import ./libraries/support/default.nix { inherit inputs; };
-   in
-   with support-lib; {
+   in with support-lib; {
       
       nixosConfigurations = {
          laptop = mkSystem ./hosts/laptop/configuration.nix;

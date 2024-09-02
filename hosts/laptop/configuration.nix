@@ -14,7 +14,6 @@
       ./hardware-configuration.nix
       (import ./disko.nix {device = "/dev/nvme1n1";})
       inputs.disko.nixosModules.default
-     #"${inputs.nixpkgs-wivrn}/nixos/modules/services/video/wivrn.nix" # NOTE: VR
    ] ++ (myLib.filesIn ./included);
    
    
@@ -102,7 +101,7 @@
    
    users.users = {
      falk = {
-        hashedPasswordFile = "/persist/passwd";
+        ##hashedPasswordFile = "/persist/passwd";
         # TODO: continue here...
      };
    };
@@ -125,8 +124,6 @@
    
    
    programs.hyprland.enable   = true; # TODO: Should this be set inside the feature?
-  #programs.alvr.enable       = true; # NOTE: VR
-  #programs.alvr.openFirewall = true; # NOTE: VR
   #programs.dconf.enable      = true; # NOTE: Gnome configuration
    
    
@@ -136,49 +133,33 @@
   # services.avahi.enable               = true;
   # services.avahi.publish.userServices = true;
    
+   ## environment.systemPackages = with pkgs; [
+   ##    wineWowPackages.stable
+   ##    wineWowPackages.waylandFull
+   ##    winetricks (pkgs.writeTextFile {
+   ##       name        = "configure-gtk";
+   ##       destination = "/bin/configure-gtk";
+   ##       executable  = true;
+   ##       text        = let
+   ##          schema      = pkgs.gsettings-desktop-schemas;
+   ##          datadir     = "${schema}/share/gsettings-schemas/${schema.name}";
+   ##       in ''
+   ##          gnome_schema=org.gnome.desktop.interface
+   ##          gsettings set $gnome_schema gtk-theme 'Dracula'
+   ##       '';
+   ##    })
+   ##    glib
+   ##   #inputs.nixpkgs-wivrn.legacyPackages.${pkgs.system}.wivrn
+   ## ];
    
-   # NOTE: This is for VR. Disabled.
-   #
-   # services.wivrn = {
-   #    package =
-   #       (import inputs.nixpkgs-wivrn {
-   #          system = "${pkgs.system}";
-   #          config = {allowUnfree = true;};
-   #       })
-   #       .wivrn;
-   #   #package        = inputs.nixpkgs-wivrn.legacyPackages.${pkgs.system}.wivrn;
-   #    enable         = true;
-   #    openFirewall   = true;
-   #    defaultRuntime = true;
-   #    highPriority   = true;
-   # };
    
-   
-   environment.systemPackages = with pkgs; [
-      wineWowPackages.stable
-      wineWowPackages.waylandFull
-      winetricks (pkgs.writeTextFile {
-         name        = "configure-gtk";
-         destination = "/bin/configure-gtk";
-         executable  = true;
-         text        = let
-            schema      = pkgs.gsettings-desktop-schemas;
-            datadir     = "${schema}/share/gsettings-schemas/${schema.name}";
-         in ''
-            gnome_schema=org.gnome.desktop.interface
-            gsettings set $gnome_schema gtk-theme 'Dracula'
+   system = {
+      stateVersion      = "24.05"; # Do not edit.
+      activationScripts = {
+         myCustomConfigFile = ''
+            # TODO
          '';
-      })
-      glib
-     #inputs.nixpkgs-wivrn.legacyPackages.${pkgs.system}.wivrn
-   ];
-   
-   
-   system.stateVersion      = "24.05"; # Do not edit.
-   system.activationScripts = {
-      myCustomConfigFile       = ''
-         # TODO
-      '';
+      };
    };
    
    

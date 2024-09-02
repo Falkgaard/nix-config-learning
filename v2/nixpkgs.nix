@@ -1,0 +1,1 @@
+/home/falk/nix2/home/user.profiles/falk/nixpkgs.nix
