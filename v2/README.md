@@ -86,7 +86,26 @@ And the second being possibly `./system/resources`. In this case I'd probably wa
 
 ## Adding new hosts
 
-If you want to add a new machine (e.g. server, work PC, media PC, etc), e.g. `work-laptop`, then you should create a new directory in [`./hosts`](hosts) that has its name suffixed with `.host` (e.g. `./host/work-laptop.host`). This directory should contain a `default.nix` file (in which **one** role from [`./system/roles/`](system/roles) should be imported; additional tweaks may be added, but ideally the role should cover most of it; another option is creating a new more fitting role in which case additional system profiles in [`./system/profiles/`](system/profiles) might also be necessary) and a generated `hardware-configuration.nix` file. Also make sure to make the appropriate additions to [`./flake.nix`](flake.nix).
+If you want to add a new machine (e.g. server, work PC, media PC, etc), e.g. `work-laptop`, then you should create a new directory in [`./hosts`](hosts) that has its name suffixed with `.host` (e.g. `./host/work-laptop.host`). This directory should contain a `default.nix` file (in which **one** role from [`./system/roles/`](system/roles) should be imported; additional tweaks may be added, but ideally the role should cover most of it; another option is creating a new more fitting role in which case additional system profiles in [`./system/profiles/`](system/profiles) might also be necessary) and a generated `hardware-configuration.nix` file. Also make sure to make the appropriate additions to [`./flake.nix`](flake.nix), namely:
+
+Locate the following attribute set:
+
+```
+      # Host system configuration registration:
+      nixosConfigurations = {
+         ...
+      };
+````
+
+Inside of it you'll want to add a name-value pair corresponding to the new host system, e.g. for a `work-laptop` host:
+
+```
+         # (1) This value should be your host name.
+         work-laptop = lib.nixosSystem {
+            modules     = [ ./hosts/work-laptop.host ]; # (2) This path should correspond to your host configuration directory.
+            specialArgs = { inherit inputs outputs; };
+         };
+```
 
 ## Adding new users
 
@@ -94,4 +113,27 @@ If you want to add a new user (e.g. `guest` or `mom`), first create a correspond
 
 ## Adding new users to a host
 
-For a user `X` and a host `Y`, this is as simple as going to `./hosts/Y.host/default.nix` and adding `../../users/X.user.nix` to the `imports = [ ... ]`.
+For a user `X` and a host `Y`, this is as simple as going to `./hosts/Y.host/default.nix` and adding `../../users/X.user.nix` to the `imports = [ ... ]` and then making the following changes to [`./flake.nix`](flake.nix):
+
+Locate the following attribute set:
+
+```
+      # Home configuration registration:
+      homeConfigurations = {
+         ...
+      };
+````
+
+
+Inside of it you'll want to add a name-value pair corresponding to the new user-host, e.g. for a `mom@media-pc` combination:
+
+```
+         # (1) This value should be your "user@host".
+         "mom@media-pc` = lib.homeManagerConfiguration {
+            modules          = [ "./home/user.profiles/mom/mom@media-pc.nix" "./home/user.profiles/mom/nixpkgs.nix" ]; # These paths should end with `/user/user@host.nix` and /user/nixpkgs.nix` respectively (with the user name and host names you want).
+            pkgs             = pkgsFor.x86_64-linux;
+            extraSpecialArgs = { inherit inputs outputs; };
+         };
+```
+
+(**TODO:** Verify that the module line's usage of strings for paths is valid.)
