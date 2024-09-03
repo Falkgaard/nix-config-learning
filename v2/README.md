@@ -68,7 +68,9 @@ For example, the [`personal.role.nix`](system/roles/personal.role.nix) role is m
 
 ## [`./users`](users)
 
-**TODO:** Describe. Possibly deprecated for planned removal.
+This is where the system side of users live (whereas the user side is in [`./home`](home)).
+
+For every user `X` there should exist a file `X.user.nix` here that adds and sets up that user when imported by a host `Y` in `./hosts/Y.host/default.nix`.
 
 ## TODO
 
@@ -88,4 +90,8 @@ If you want to add a new machine (e.g. server, work PC, media PC, etc), e.g. `wo
 
 ## Adding new users
 
-If you want to add a new user (e.g. `guest` or `mom`), create a new profile directory for each in [`./home/user.profiles`] (e.g. `./home/user.profiles/mom`) which should then contain a `user@host.nix` configuration for every host you want the new user to be a part of (e.g. `./home/user.profiles/mom/mom@home-pc.nix`) as well as a `profiles` directory (e.g. `./home/user.profiles/mom/profiles`) that contains any user specifics (user installations and configurations, etc). The purpose of the `user@host.nix` configurations is mainly to enable the features in `profiles` that the user wants for that specific host. For example, you might have a gaming profile that you only want on your personal laptop whereas some more general profile(s) for things like web browsing, text processing, etc might be desired on both home and work computers.
+If you want to add a new user (e.g. `guest` or `mom`), first create a corresponding `.user.nix` file in [`./users`](users) (e.g. `./users/mom.user.nix`) that contains the system inclusion (see existing `.user.nix` files for reference) and then create a new profile directory for each in [`./home/user.profiles`] (e.g. `./home/user.profiles/mom`) which should then contain a `user@host.nix` configuration for every host you want the new user to be a part of (e.g. `./home/user.profiles/mom/mom@home-pc.nix`) as well as a `profiles` directory (e.g. `./home/user.profiles/mom/profiles`) that contains any user specifics (user installations and configurations, etc). The purpose of the `user@host.nix` configurations is mainly to enable the features in `profiles` that the user wants for that specific host. For example, you might have a gaming profile that you only want on your personal laptop whereas some more general profile(s) for things like web browsing, text processing, etc might be desired on both home and work computers.
+
+## Adding new users to a host
+
+For a user `X` and a host `Y`, this is as simple as going to `./hosts/Y.host/default.nix` and adding `../../users/X.user.nix` to the `imports = [ ... ]`.
