@@ -72,7 +72,13 @@ For example, the [`personal.role.nix`](system/roles/personal.role.nix) role is m
 
 ## TODO
 
-Things to be added: shell, hydra, sops, git specific files, templates, overlays, pkgs, etc).
+Things to be added: shell, hydra, sops, git specific files, templates, overlays, pkgs, etc.
+
+Decide on a structure for resource directories. I'm currently leaning towards having two locations for them:
+
+The first being `./home/user.profiles/SomeUser/resources` for resources specific to SomeUser (e.g. wallpapers).
+
+And the second being possibly `./system/resources`. In this case I'd probably want it to have a structure like `./system/resources/SomeProfile` and/or `./system/resources/SomeRole`... TODO: Deliberate!
 
 # Making additions
 
