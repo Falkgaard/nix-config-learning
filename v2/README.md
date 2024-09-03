@@ -28,9 +28,9 @@ This directory contains user profiles (things like user-installed applications, 
 
 This directory contains host machine configurations.
 
-For example, [`./hosts/laptop.host`](`./hosts/laptop.host) is the configuration for my personal laptop, which contains the following two files:
+For example, [`laptop.host`](`./hosts/laptop.host) is the configuration for my personal laptop, which contains the following two files:
 
-[`./hosts/laptop.host/hardware-configuration.nix`](`./hosts/laptop.host/hardware-configuration.nix) which is the hardware configuration specific to the laptop as well as [`./hosts/laptop.host/default.nix`](`./hosts/laptop.host/default.nix) which contains some additional configuration specific to it as well as imports the role I want it to fill (in this case, [`./system/roles/personal.role.nix`](system/roles/personal.role.nix)).
+[`laptop.host/hardware-configuration.nix`](`./hosts/laptop.host/hardware-configuration.nix) which is the hardware configuration specific to the laptop as well as [`laptop.host/default.nix`](`./hosts/laptop.host/default.nix) which contains some additional configuration specific to it as well as imports the role I want it to fill (in this case, [`./system/roles/personal.role.nix`](system/roles/personal.role.nix)).
 
 ## [`./libraries`](libraries)
 
@@ -56,7 +56,7 @@ This is the core system profile that represents globally shared essential config
 
 This directory contains profiles for things such as boot loaders, desktop managers, display managers, etc. Every role will likely want to pick one of these.
 
-For example, the [`./system/profiles/desktop.profiles/kde.profile.nix`](./system/profiles/desktop.profiles/kde.profile.nix) configuration selects SDDM and KDE Plasma 6.
+For example, the [`desktop.profiles/kde.profile.nix`](./system/profiles/desktop.profiles/kde.profile.nix) configuration selects SDDM and KDE Plasma 6.
 
 (**TODO:** Consider whether boot loaders should be included here. Also consider whehther WMs/DEs should be handled here or in userland.)
 
@@ -64,7 +64,7 @@ For example, the [`./system/profiles/desktop.profiles/kde.profile.nix`](./system
 
 This directory contains the system roles (nix configurations ending in `.role.nix`) which import one or more profiles from [`./system/profiles`](system/profiles).
 
-For example, the [`./system/roles/personal.role.nix`](system/roles/personal.role.nix) role is meant for personal computers. Later on I'll be adding roles such as `work.role.nix`, `media-pc.role.nix`, and maybe ones such as `build-server.role.nix` or `web-server.role.nix`.
+For example, the [`personal.role.nix`](system/roles/personal.role.nix) role is meant for personal computers. Later on I'll be adding roles such as `work.role.nix`, `media-pc.role.nix`, and maybe ones such as `build-server.role.nix` or `web-server.role.nix`.
 
 ## [`./users`](users)
 
