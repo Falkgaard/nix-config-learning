@@ -46,7 +46,7 @@
 
       # Host system configuration registration:
       nixosConfigurations = {
-         # (OLD) laptop = support-lib.mkSystem ./hosts/laptop.host;
+         # (OLD) laptop = support-lib.mkSystem ./hosts/laptop;
          laptop = lib.nixosSystem {
             modules     = [ ./hosts/laptop ];
             specialArgs = { inherit inputs outputs; };
@@ -56,7 +56,7 @@
       
       # Home configuration registration:
       homeConfigurations = {
-         # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user.profiles/falk/falk@laptop.nix";
+         # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user-config-suites/falk/user-config-instance/falk@laptop.nix";
          "falk@laptop" = lib.homeManagerConfiguration {
             modules = [
                "./home/user-config-suites/falk/user-config-instance/falk@laptop.nix"
@@ -69,3 +69,4 @@
       };
   };
 }
+

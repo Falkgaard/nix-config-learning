@@ -7,7 +7,6 @@ in {
 
       settings = {
          #extra-substituters = ...; # TODO
-
          #extra-trusted-public-keys = ...; # TODO
 
          auto-optimise-store = lib.mkDefault true;
@@ -47,3 +46,4 @@ in {
       nixPath  = lib.mapAttrsToList  (n: _: "${n}=flake:${n}")     flakeInputs;
    };
 } # end-of: <module>
+
