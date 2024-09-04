@@ -1,0 +1,4 @@
+{
+   programs.krita.enable = true;
+}
+

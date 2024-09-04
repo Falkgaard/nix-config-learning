@@ -4,3 +4,5 @@
 # Wine/Proton?
 # Prismlauncher (Minecraft Launcher)
 # Anything else?
+{}
+
