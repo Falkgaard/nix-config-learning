@@ -198,10 +198,12 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 
 ----
 
+(**TODO:** Make the stack a table instead?)
+
 (**TODO:** Plugins for NeoVim, Code-OSS, Plasma, Hyprland, etc.)
 
 (**TODO:** Development related things for various languages, RenderDoc, OpenGL/Vulkan, etc.)
 
 (**TODO:** Miscellaneous apps like Discord, qbittorrent, etc.)
 
-(**TODO:** Various command-line utils like ripgrep, tree, tldr, bat, etc.)
+(**TODO:** Various command-line utils like git, curl, ripgrep, tree, tmux, tldr, bat, etc.)
