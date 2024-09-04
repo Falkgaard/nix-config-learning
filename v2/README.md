@@ -53,7 +53,7 @@ This directory contains the system profiles (either standalone `.nix` configurat
 
 #### [`./system/profiles/core`](./system/profiles/core)
 
-This is the core system profile that represents globally shared essential configuration (i.e. configuration that is meant for all hosts) and should therefore be imported by *all* roles.
+This is the core system profile that represents globally shared essential system configuration (i.e. configuration that is meant for all hosts) and should therefore be imported by *all* roles. Things that don't need elevated privileges should preferably go in `./home/global-profiles/core` if used by all users or `./home/user-config-suites/SomeUser/profiles/core` if used by one user but shared by all their user config instances (i.e. all their user-host instances in `./home/user-config-suites/SomeUser/user-config-instances`).
 
 #### [`./system/profiles/desktops`](./system/profiles/desktops)
 
@@ -83,7 +83,9 @@ Decide on a structure for resource directories. I'm currently leaning towards ha
 
 The first being `./home/user-config-suites/SomeUser/resources` for resources specific to SomeUser (e.g. wallpapers).
 
-And the second being possibly `./system/resources`. In this case I'd probably want it to have a structure like `./system/resources/SomeProfile` and/or `./system/resources/SomeRole`... TODO: Deliberate!
+And the second being possibly `./system/resources`. In this case I'd probably want it to have a structure like `./system/resources/SomeProfile` and/or `./system/resources/SomeRole`... **TODO:** Deliberate!
+
+Add `./home/global-profiles` for configurations that are shared by multiple users.
 
 # Making additions
 
