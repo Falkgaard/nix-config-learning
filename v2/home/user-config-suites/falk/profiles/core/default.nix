@@ -1,5 +1,3 @@
 {
-   imports = [
-       ./locale.nix
-   ];
+   imports = [];
 }
