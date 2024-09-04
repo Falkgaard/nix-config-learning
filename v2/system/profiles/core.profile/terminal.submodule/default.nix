@@ -1,8 +1,8 @@
 { inputs, outputs, ... }:
 {
    imports = [
-      ./shell.nix
-      ./prompt.nix
-      ./essentials.nix
+      ./shell.submodule.nix
+      ./prompt.submodule.nix
+      ./essentials.submodule.nix
    ];
 }

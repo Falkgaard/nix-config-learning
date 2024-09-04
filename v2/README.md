@@ -131,7 +131,7 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 
 ```
          # (1) This value should be your "user@host".
-         "mom@media-pc` = lib.homeManagerConfiguration {
+         "mom@media-pc" = lib.homeManagerConfiguration {
             # These paths should end with `/user/user@host.nix` and /user/nixpkgs.nix` respectively (with the user and host names you want).
             modules          = [ "./home/user.profiles/mom/mom@media-pc.nix" "./home/user.profiles/mom/nixpkgs.nix" ];
             pkgs             = pkgsFor.x86_64-linux;
