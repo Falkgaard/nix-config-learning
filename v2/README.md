@@ -209,3 +209,5 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 (**TODO:** Various command-line utils like git, curl, ripgrep, tree, tmux, tldr, bat, etc.)
 
 (**TODO:** Office-related things like LaTeX, LibreOffice-Fresh, gnuplot, etc.)
+
+(**TODO:** Style-related things like Stylix?)
