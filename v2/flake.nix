@@ -56,11 +56,11 @@
       
       # Home configuration registration:
       homeConfigurations = {
-         # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user-config-suites/falk/user-config-instance/falk@laptop.nix";
+         # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user-config-suites/falk/user-config-instance/laptop.nix";
          "falk@laptop" = lib.homeManagerConfiguration {
             modules = [
-               "./home/user-config-suites/falk/user-config-instance/falk@laptop.nix"
-               "./home/user-config-suites/falk/nixpkgs.nix"
+               ./home/user-config-suites/falk/user-config-instance/laptop.nix
+               ./home/user-config-suites/falk/nixpkgs.nix
             ]; # TODO: Verify that strings can be used instead of paths...
             pkgs             = pkgsFor.x86_64-linux;
             extraSpecialArgs = { inherit inputs outputs; };
