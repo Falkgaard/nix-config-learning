@@ -7,7 +7,7 @@
          #theme          = "sddm-sugar-dark";
           enableHidpi    = true;
           wayland.enable = true;
-          autoLogin      = false; # TODO: Look into.
+         #autoLogin      = false; # TODO: Look into.
           settings       = {
              # TODO.
              Theme = {
