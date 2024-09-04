@@ -207,3 +207,5 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 (**TODO:** Miscellaneous apps like Discord, qbittorrent, etc.)
 
 (**TODO:** Various command-line utils like git, curl, ripgrep, tree, tmux, tldr, bat, etc.)
+
+(**TODO:** Office-related things like LaTeX, LibreOffice-Fresh, gnuplot, etc.)
