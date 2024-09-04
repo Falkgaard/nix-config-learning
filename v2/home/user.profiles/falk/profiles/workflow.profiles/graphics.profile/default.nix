@@ -4,5 +4,7 @@
    import = [
       ./blender.submodule.nix
       ./krita.submodule.nix
+      # TODO: libresprite (FOSS aseprite)
+      #       inkscape?
    ];
 }
