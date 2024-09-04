@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, inputs, ... }:
 {
    imports = [
       # TODO: Refactor into hardware-configuration?
