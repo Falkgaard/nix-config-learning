@@ -153,3 +153,53 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 ```
 
 (**TODO:** Verify that the module line's usage of strings for paths is valid.)
+
+# My Personal Stack
+
+**Bootloader:** GRUB
+
+**Display Server:** Wayland
+
+**Shell:** Fish
+
+**Prompt:** Starship
+
+**Display Manager:** SDDM
+
+**Desktop Manager:** KDE Plasma 6
+
+**Tiling Window Manager:** Hyprland (as an alternative to KDE Plasma 6)
+
+**(TUI) Editor:** NeoVim
+
+**(TUI) File Manager:** Yazi
+
+**(GUI) Editor:** Code-OSS (VSCode)
+
+**(GUI) File Manager:** Dolphin
+
+**(GUI) Web Browser:** Firefox
+
+**(GUI) Media Player:** mpv + SVP (for frame interpolation)
+
+**(GUI) Pixel Art Editor:** Libresprite (Aseprite)
+
+**(GUI) Image Editor:** Krita
+
+**(GUI) 3D Editor:** Blender
+
+**(GUI) Document Viewer:** Zathura
+
+**(GUI) Game Launchers:** Steam, Heroic, Lutris, Prismlauncher, DOSBox, RetroArch
+
+...
+
+----
+
+(**TODO:** Plugins for NeoVim, Code-OSS, Plasma, Hyprland, etc.)
+
+(**TODO:** Development related things for various languages, RenderDoc, OpenGL/Vulkan, etc.)
+
+(**TODO:** Miscellaneous apps like Discord, qbittorrent, etc.)
+
+(**TODO:** Various command-line utils like ripgrep, tree, tldr, bat, etc.)
