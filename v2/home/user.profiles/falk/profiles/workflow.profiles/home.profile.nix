@@ -1,1 +1,1 @@
-# qbittorrent-qt5 ... anything else?
+# qbittorrent-qt5, discord ... anything else?
