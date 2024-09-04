@@ -82,6 +82,8 @@ The first being `./home/user.profiles/SomeUser/resources` for resources specific
 
 And the second being possibly `./system/resources`. In this case I'd probably want it to have a structure like `./system/resources/SomeProfile` and/or `./system/resources/SomeRole`... TODO: Deliberate!
 
+Maybe refactor certain directories? E.g. `workflow.profiles` -> `workflows` in order to make `*.profile` return all profiles (`X.profile.nix` files and `Y.profile` directories). Similar case: `desktop.profiles` -> `desktops`. Maybe also `./home/user.profiles/` -> `./home/users/`
+
 # Making additions
 
 ## Adding new hosts
