@@ -3,16 +3,16 @@
 {
     imports = [
        # Required core profile:
-       ./profiles/core.profile
+       ../profiles/core
        # Desired desktop environment profile(s):
-       ./profiles/desktop.profiles/hyprland.profile.nix
-       ./profiles/desktop.profiles/kde-plasma-6.profile.nix
+       ../profiles/desktops/hyprland.nix
+       ../profiles/desktops/kde-plasma-6.nix
        # Desired workflow profile(s):
-       ./profiles/workflow.profiles/coding.profile.nix
-       ./profiles/workflow.profiles/gaming.profile.nix
-       ./profiles/workflow.profiles/general.profile.nix
-       ./profiles/workflow.profiles/graphics.profile.nix
-       ./profiles/workflow.profiles/home.profile.nix
-       ./profiles/workflow.profiles/media.profile.nix
+       ../profiles/workflows/coding.nix
+       ../profiles/workflows/gaming.nix
+       ../profiles/workflows/general.nix
+       ../profiles/workflows/graphics
+       ../profiles/workflows/media.nix
+       ../profiles/workflows/personal.nix
     ];
 }

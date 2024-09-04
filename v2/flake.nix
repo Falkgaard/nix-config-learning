@@ -48,7 +48,7 @@
       nixosConfigurations = {
          # (OLD) laptop = support-lib.mkSystem ./hosts/laptop.host;
          laptop = lib.nixosSystem {
-            modules     = [ ./hosts/laptop.host ];
+            modules     = [ ./hosts/laptop ];
             specialArgs = { inherit inputs outputs; };
          };
          # NOTE: Add more host system configurations here (when needed).
@@ -59,8 +59,8 @@
          # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user.profiles/falk/falk@laptop.nix";
          "falk@laptop" = lib.homeManagerConfiguration {
             modules = [
-               "./home/user-configuration-suites/falk.user-configuration-suite/user-configuration-instance/falk@laptop.user-configuration-instance.nix"
-               "./home/user-configuration-suites/falk.user-configuration-suite/nixpkgs.nix"
+               "./home/user-config-suites/falk/user-config-instance/falk@laptop.nix"
+               "./home/user-config-suites/falk/nixpkgs.nix"
             ]; # TODO: Verify that strings can be used instead of paths...
             pkgs             = pkgsFor.x86_64-linux;
             extraSpecialArgs = { inherit inputs outputs; };

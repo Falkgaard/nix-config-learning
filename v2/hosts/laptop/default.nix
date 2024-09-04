@@ -9,10 +9,10 @@
       ./hardware-configuration.nix
 
       # Chosen role:
-      ../../system/system-roles/personal.system-role.nix
+      ../../system/roles/personal.nix
 
       # Added user(s):
-      ../../users/falk.user.nix
+      ../../users/falk.nix
    ];
 
    # Configuration for the hybrid GPU hardware:

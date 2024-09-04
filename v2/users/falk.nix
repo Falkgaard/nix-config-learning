@@ -29,7 +29,8 @@ in {
    #   neededForUsers = true;
    #};
 
-   home-manager.users.falk = import "../home/user-configuration-suites/falk.user-configuration-suite/user-configuration-instances/falk@${config.networking.hostName}.user-configuration-instance.nix";  # TODO: Verify using a string is OK.
+   home-manager.users.falk = # TODO: Verify using a string is OK.
+      import "../home/user-config-suites/falk/user-config-instances/falk@${config.networking.hostName}.nix";
 
    # TODO: security.pam.sevices?
 }

@@ -1,11 +1,11 @@
 { inputs, outputs, ... }: {
    imports = [
       inputs.home-manager.nixosModules.home-manager # TODO: Grok & Explain.
-      ./terminal.submodule
-      ./nix.submodule.nix
-      ./nix-ld.submodule.nix
-      ./locale.submodule.nix
-      ./audio.submodule.nix
+      ./terminal
+      ./nix.nix
+      ./nix-ld.nix
+      ./locale.nix
+      ./audio.nix
       # TODO: systemd-initrd? sops? auto-upgrade? persistence?
    ] ++ (builtins.attrValues outputs.nixosModules); # TODO: Grok & Explain.
 

@@ -1,0 +1,6 @@
+# This snippet has one placeholder meant to be substituted: HOST
+         HOST = lib.nixosSystem {
+            modules     = [ ./hosts/HOST.host ];
+            specialArgs = { inherit inputs outputs; };
+         };
+

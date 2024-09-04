@@ -1,0 +1,10 @@
+# This snippet has three placeholders meant to be substituted: USER, HOST, and ARCHITECTURE.
+         "USER@HOST" = lib.homeManagerConfiguration {
+            modules = [
+               "./home/configuration-suites/USER/configuration-instances/USER@HOST.nix"
+               "./home/configuration-suites/USER/nixpkgs.nix"
+            ];
+            pkgs             = pkgsFor.ARCHITECTURE;
+            extraSpecialArgs = { inherit inputs outputs; };
+         };
+
