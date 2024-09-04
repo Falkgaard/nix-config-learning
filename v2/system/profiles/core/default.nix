@@ -13,7 +13,7 @@
    home-manager.extraSpecialArgs = { inherit inputs outputs; }; # TODO: Grok & Explain.
 
    nixpkgs = {
-      overlays           = builtins.attrValues  outputs.overlays; # TODO: Grok & Explain.
+     #overlays           = builtins.attrValues  outputs.overlays; # TODO: Grok & Explain.
       config.allowUnfree = true;
    };
 
