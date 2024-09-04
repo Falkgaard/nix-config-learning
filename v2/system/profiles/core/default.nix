@@ -6,6 +6,7 @@
       ./nix-ld.nix
       ./locale.nix
       ./audio.nix
+      ./home.nix
       # TODO: systemd-initrd? sops? auto-upgrade? persistence?
    ] ++ (builtins.attrValues outputs.nixosModules); # TODO: Grok & Explain.
 
