@@ -6,7 +6,7 @@ This is the core entry point and serves two primary features:
 
 1. To (re)build NixOS for a specific target host with a single command: (e.g. to rebuild it for my laptop I can do something like `sudo nixos-rebuild switch --flake 'github:Falkgaard/NixOS#laptop'`). (**Note:** A QoL shell script will be provided for this purpose later.)
 
-2. To ensure reproducibility by pinning any dependency version with a `flake.lock` file.
+2. To ensure reproducibility by pinning all dependency versions with a `flake.lock` file.
 
 ## [`./README.md`](README.md)
 
