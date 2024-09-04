@@ -77,7 +77,7 @@ For every user `X` there should exist a file `X.nix` here that adds and sets up 
 
 ## TODO
 
-Things to be added: shell, hydra, sops, git specific files, templates, overlays, pkgs, etc.
+Things to be added: shell, hydra, sops, git specific files, overlays, pkgs, etc.
 
 Decide on a structure for resource directories. I'm currently leaning towards having two locations for them:
 
@@ -92,6 +92,10 @@ Look into [plasma-manager](https://github.com/nix-community/plasma-manager).
 Look into [impermanence](https://github.com/nix-community/impermanence) ([wiki](https://nixos.wiki/wiki/Impermanence)) and BTRFS/tmpfs.
 
 Decide on ideal [home-manager](https://home-manager.dev/) approach: NixOS module VS. standalone.
+
+Add a `How To Make A Fresh Install` section that explains the steps involved such as first doing a NixOS install with a live ISO (e.g. with a USB drive), adding the machine as a new host, and building it.
+
+Add a section for `./pkgs`.
 
 # Making additions
 
