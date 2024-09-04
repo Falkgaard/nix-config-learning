@@ -91,6 +91,8 @@ Look into [plasma-manager](https://github.com/nix-community/plasma-manager).
 
 Look into [impermanence](https://github.com/nix-community/impermanence) ([wiki](https://nixos.wiki/wiki/Impermanence)) and BTRFS/tmpfs.
 
+Decide on ideal [home-manager](https://home-manager.dev/) approach: NixOS module VS. standalone.
+
 # Making additions
 
 ## Adding new hosts (TODO: Update!)
