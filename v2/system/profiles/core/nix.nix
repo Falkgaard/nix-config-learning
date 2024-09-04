@@ -3,10 +3,10 @@ let
    flakeInputs = lib.filterAttrs  (_: lib.isType "flake")  inputs;
 in {
    nix = {
-      # package = ...; # TODO
+     #package = ...; # TODO
 
       settings = {
-         #extra-substituters = ...; # TODO
+         #extra-substituters        = ...; # TODO
          #extra-trusted-public-keys = ...; # TODO
 
          auto-optimise-store = lib.mkDefault true;
@@ -35,7 +35,7 @@ in {
 
       gc = {
          automatic  = true;
-         frequency  = "weekly";
+        #frequency  = "weekly";
          options    = "--delete-older-than +3"; # Only keep the 3 most recent generations.
          persistent = true; # TODO: Explain.
       };
