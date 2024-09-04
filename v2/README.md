@@ -24,13 +24,16 @@ This is the chosen license of the repo.
 
 This directory contains user profiles (things like user-installed applications, user configurations, etc); both general as well as user-host specifics.
 
+(**TODO:** Go into detail regarding `user-config-suites`, `user-config-suites/SomeUser/user-config-instances`, `user-config-suites/SomeUser/profiles`, etc.)
+
+
 ## [`./hosts`](hosts)
 
 This directory contains host machine configurations.
 
-For example, [`laptop.host`](`./hosts/laptop.host) is the configuration for my personal laptop, which contains the following two files:
+For example, [`laptop`](`./hosts/laptop) is the configuration for my personal laptop, which contains the following two files:
 
-[`laptop.host/hardware-configuration.nix`](`./hosts/laptop.host/hardware-configuration.nix) which is the hardware configuration specific to the laptop as well as [`laptop.host/default.nix`](`./hosts/laptop.host/default.nix) which contains some additional configuration specific to it as well as imports the role I want it to fill (in this case, [`./system/roles/personal.role.nix`](system/roles/personal.role.nix)).
+[`laptop.host/hardware-configuration.nix`](`./hosts/laptop.host/hardware-configuration.nix) which is the hardware configuration specific to the laptop as well as [`laptop/default.nix`](`./hosts/laptop/default.nix) which contains some additional configuration specific to it as well as imports the role I want it to fill (in this case, [`./system/roles/personal.nix`](system/roles/personal.nix)).
 
 ## [`./libraries`](libraries)
 
@@ -38,7 +41,7 @@ This directory is meant for configuration libraries (mainly small helper modules
 
 ## [`./scripts`](scripts)
 
-This directory hasn't been added yet, but it will contain any shell scripts that might be useful. Mainly convenience ones, such as a script for adding a new user (by copying some default template), assigning users to hosts, (re)building a specific host, etc.
+This directory hasn't been added yet, but it will contain any shell scripts that might be useful. Mainly convenience ones, such as a script for adding a new user (by copying some default template), assigning users to hosts, (re)building a specific host, etc
 
 ## [`./system`](system)
 
@@ -46,31 +49,31 @@ This directory contains system-level configurations in the form of roles and sys
 
 ### [`./system/profiles`](system/profiles)
 
-This directory contains the system profiles (nix configurations ending in `.profile.nix` or module directories ending in `.profile` and containing a `default.nix` file.
+This directory contains the system profiles (either standalone `.nix` configuration modules or module directories containing a `default.nix`). Multiple profiles can be activated at once and certain profiles might even be a combination of profiles. Every role will want at least one profile (core) and a desktop profile (see below).
 
-#### [`./system/profiles/core.profile`](./system/profiles/core.profile)
+#### [`./system/profiles/core`](./system/profiles/core)
 
 This is the core system profile that represents globally shared essential configuration (i.e. configuration that is meant for all hosts) and should therefore be imported by *all* roles.
 
-#### [`./system/profiles/desktop.profiles`](./system/profiles/desktop.profiles)
+#### [`./system/profiles/desktops`](./system/profiles/desktops)
 
 This directory contains profiles for things such as boot loaders, desktop managers, display managers, etc. Every role will likely want to pick one of these.
 
-For example, the [`desktop.profiles/kde.profile.nix`](./system/profiles/desktop.profiles/kde.profile.nix) configuration selects SDDM and KDE Plasma 6.
+For example, the [`desktops/kde.nix`](./system/profiles/desktops/kde.nix) configuration selects SDDM and KDE Plasma 6.
 
 (**TODO:** Consider whether boot loaders should be included here. Also consider whehther WMs/DEs should be handled here or in userland.)
 
 ### [`./system/roles`](system/roles)
 
-This directory contains the system roles (nix configurations ending in `.role.nix`) which import one or more profiles from [`./system/profiles`](system/profiles).
+This directory contains the system roles which import one or more profiles from [`./system/profiles`](system/profiles).
 
-For example, the [`personal.role.nix`](system/roles/personal.role.nix) role is meant for personal computers. Later on I'll be adding roles such as `work.role.nix`, `media-pc.role.nix`, and maybe ones such as `build-server.role.nix` or `web-server.role.nix`.
+For example, the [`personal.nix`](system/roles/personal.nix) role is meant for personal computers. Later on I'll be adding roles such as `work.nix`, `media-pc.nix`, and maybe ones such as `build-server.nix` or `web-server.nix`.
 
 ## [`./users`](users)
 
 This is where the system side of users live (whereas the user side is in [`./home`](home)).
 
-For every user `X` there should exist a file `X.user.nix` here that adds and sets up that user when imported by a host `Y` in `./hosts/Y.host/default.nix`.
+For every user `X` there should exist a file `X.nix` here that adds and sets up that user when imported by a host `Y` in `./hosts/Y/default.nix`.
 
 ## TODO
 
@@ -78,15 +81,13 @@ Things to be added: shell, hydra, sops, git specific files, templates, overlays,
 
 Decide on a structure for resource directories. I'm currently leaning towards having two locations for them:
 
-The first being `./home/user.profiles/SomeUser/resources` for resources specific to SomeUser (e.g. wallpapers).
+The first being `./home/user-config-suites/SomeUser/resources` for resources specific to SomeUser (e.g. wallpapers).
 
 And the second being possibly `./system/resources`. In this case I'd probably want it to have a structure like `./system/resources/SomeProfile` and/or `./system/resources/SomeRole`... TODO: Deliberate!
 
-Maybe refactor certain directories? E.g. `workflow.profiles` -> `workflows` in order to make `*.profile` return all profiles (`X.profile.nix` files and `Y.profile` directories). Similar case: `desktop.profiles` -> `desktops`. Maybe also `./home/user.profiles/` -> `./home/users/`
-
 # Making additions
 
-## Adding new hosts
+## Adding new hosts (TODO: Update!)
 
 If you want to add a new machine (e.g. server, work PC, media PC, etc), e.g. `work-laptop`, then you should create a new directory in [`./hosts`](hosts) that has its name suffixed with `.host` (e.g. `./host/work-laptop.host`). This directory should contain a `default.nix` file (in which **one** role from [`./system/roles/`](system/roles) should be imported; additional tweaks may be added, but ideally the role should cover most of it; another option is creating a new more fitting role in which case additional system profiles in [`./system/profiles/`](system/profiles) might also be necessary) and a generated `hardware-configuration.nix` file. Also make sure to make the appropriate additions to [`./flake.nix`](flake.nix), namely:
 
@@ -109,11 +110,11 @@ Inside of it you'll want to add a name-value pair corresponding to the new host 
          };
 ```
 
-## Adding new users
+## Adding new users (TODO: Update!)
 
 If you want to add a new user (e.g. `guest` or `mom`), first create a corresponding `.user.nix` file in [`./users`](users) (e.g. `./users/mom.user.nix`) that contains the system inclusion (see existing `.user.nix` files for reference) and then create a new profile directory for each in [`./home/user.profiles`] (e.g. `./home/user.profiles/mom`) which should then contain a `user@host.nix` configuration for every host you want the new user to be a part of (e.g. `./home/user.profiles/mom/mom@home-pc.nix`) as well as a `profiles` directory (e.g. `./home/user.profiles/mom/profiles`) that contains any user specifics (user installations and configurations, etc). The purpose of the `user@host.nix` configurations is mainly to enable the features in `profiles` that the user wants for that specific host. For example, you might have a gaming profile that you only want on your personal laptop whereas some more general profile(s) for things like web browsing, text processing, etc might be desired on both home and work computers.
 
-## Adding new users to a host
+## Adding new users to a host (TODO: Update!)
 
 For a user `X` and a host `Y`, this is as simple as going to `./hosts/Y.host/default.nix` and adding `../../users/X.user.nix` to the `imports = [ ... ]` and then making the following changes to [`./flake.nix`](flake.nix):
 
