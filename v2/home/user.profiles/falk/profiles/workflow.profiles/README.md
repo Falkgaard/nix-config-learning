@@ -23,3 +23,7 @@ This profile covers what a media PC needs. Things like a media player, frame int
 ## Personal
 
 This profile has things that might be unwanted outside of home computers. E.g. bittorrent clients and "smart home" stuff.
+
+## Office
+
+This profile has things that pertains to authoring and displaying documents.
