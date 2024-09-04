@@ -9,7 +9,7 @@
       ./hardware-configuration.nix
 
       # Chosen role:
-      ../../system/roles/personal.role.nix
+      ../../system/system-roles/personal.system-role.nix
 
       # Added user(s):
       ../../users/falk.user.nix
