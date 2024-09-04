@@ -1,8 +1,8 @@
 {
     imports = [
        # Required core profile:
-       ../profiles/core.profile
+       ../system-profiles/core.system-profile
        # Chosen desktop profile:
-       ../profiles/desktop.profiles/kde.profile.nix
+       ../system-profiles/desktops/kde.system-profile.nix
     ];
 }
