@@ -174,6 +174,8 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 
 **(TUI) File Manager:** Yazi
 
+**(GUI) Terminal Emulator:** Kitty
+
 **(GUI) Editor:** Code-OSS (VSCode)
 
 **(GUI) File Manager:** Dolphin
