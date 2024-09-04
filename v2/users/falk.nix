@@ -30,7 +30,7 @@ in {
    #};
 
    home-manager.users.falk = # TODO: Verify using a string is OK.
-      import ../home/user-config-suites/falk/user-config-instances/"${config.networking.hostName}".nix;
+      import ../home/user-config-suites/falk/user-config-instances/${config.networking.hostName}.nix;
 
    # TODO: security.pam.sevices?
 }
