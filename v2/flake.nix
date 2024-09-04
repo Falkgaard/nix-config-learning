@@ -40,7 +40,7 @@
      #overlays           = import ./overlays  { inherit inputs outputs; }; # TODO.
      #hydraJobs          = import ./hydra.nix { inherit inputs outputs; }; # TODO.
 
-     packages            = forEachSystem (pkgs: import ./pkgs      { inherit pkgs; } );
+      packages           = forEachSystem (pkgs: import ./pkgs      { inherit pkgs; } );
      #devShells          = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; } ); # TODO.
      #formatter          = forEachSystem (pkgs: pkgs.alejandra );                       # TODO.
 
@@ -58,7 +58,10 @@
       homeConfigurations = {
          # (OLD) "falk@laptop" = support-lib.mkHome "x86_64-linux" "./home/user.profiles/falk/falk@laptop.nix";
          "falk@laptop" = lib.homeManagerConfiguration {
-            modules          = [ "./home/user.profiles/falk/falk@laptop.nix" "./home/user.profiles/falk/nixpkgs.nix" ]; # TODO: Verify that strings can be used instead of paths...
+            modules = [
+               "./home/user-configuration-suites/falk.user-configuration-suite/user-configuration-instance/falk@laptop.user-configuration-instance.nix"
+               "./home/user-configuration-suites/falk.user-configuration-suite/nixpkgs.nix"
+            ]; # TODO: Verify that strings can be used instead of paths...
             pkgs             = pkgsFor.x86_64-linux;
             extraSpecialArgs = { inherit inputs outputs; };
          };
