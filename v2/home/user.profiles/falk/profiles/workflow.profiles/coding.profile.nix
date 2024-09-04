@@ -1,9 +1,11 @@
+# TODO: Rename to `development.profile`? (Since things like renderdoc isn't really coding.)
 # TODO: Refactor into a module directory
+#
 #       Create submodules for different languages:
 #           1. C/C++/C3C
 #           2. Rust
 #           4. Lua(JIT)
-#           5. OpenGL/Vulkan/GLSL? (handle as options to other languages?)
+#           5. "3D" ... OpenGL/Vulkan/GLSL? (handle as options to other languages?)
 #              ...
 #           etc
 
@@ -46,5 +48,12 @@
 #    luaformatter
 #    nvim plugins... (overlay?)
 #    dev shell...
+
+# "3D":
+#
+#    OpenGL, Vulkan ...
+#    renderdoc
+#    nvim plugins (GLSL)... (overlay?)
+#    ...
 
 # TODO: Decide on how to handle overlap (e.g. Lua|LuaJiT + C++ Sol2 ...
