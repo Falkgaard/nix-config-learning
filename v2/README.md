@@ -87,6 +87,10 @@ And the second being possibly `./system/resources`. In this case I'd probably wa
 
 Add `./home/global-profiles` for configurations that are shared by multiple users.
 
+Look into [plasma-manager](https://github.com/nix-community/plasma-manager).
+
+Look into [impermanence](https://github.com/nix-community/impermanence) ([wiki](https://nixos.wiki/wiki/Impermanence)) and BTRFS/tmpfs.
+
 # Making additions
 
 ## Adding new hosts (TODO: Update!)
