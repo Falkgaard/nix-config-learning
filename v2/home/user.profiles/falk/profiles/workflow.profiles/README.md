@@ -18,7 +18,7 @@ This workflow profile covers graphical work such as image editing, 3D modeling, 
 
 ## Media
 
-This profile covers what a media PC needs. Things like a media player, frame interpolation, etc.
+This profile covers what's needed for media playback. Things like a media player, frame interpolation, etc.
 
 ## Personal
 
