@@ -1,5 +1,9 @@
 # Workflow Responsibilities
 
+## Audio Editing
+
+This profile has things useful for editing sound effects and creating music.
+
 ## Coding
 
 This workflow profile covers coding and development related responsibilities such as debugging, language servers, OpenGL/Vulkan, RenderDoc, etc.
@@ -27,3 +31,7 @@ This profile has things that might be unwanted outside of home computers. E.g. b
 ## Office
 
 This profile has things that pertains to authoring and displaying documents.
+
+## Multimedia (TODO)
+
+This is a meta profile that pulls in the following profiles: 2d-editing, 3d-editing, video-editing, and audio-editing.
