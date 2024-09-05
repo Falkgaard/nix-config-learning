@@ -215,3 +215,7 @@ Inside of it you'll want to add a name-value pair corresponding to the new user-
 (**TODO:** Office-related things like LaTeX, LibreOffice-Fresh, gnuplot, etc.)
 
 (**TODO:** Style-related things like Stylix?)
+
+# Special Thanks
+
+I would like to thank the following two youtube channels for inspiring me to give NixOS a go: [No Boilerplate](https://www.youtube.com/c/NoBoilerplate) and [Vimjoyer](https://www.youtube.com/@vimjoyer). I would also like to thank Vimjoyer for the inspiration that I've gotten from their [config repo](https://github.com/vimjoyer/nixconf) while trying to learn Nix/NixOS/Home-Manager/Flakes/etc as well as the [excellent config repo of Misterio77](https://github.com/Misterio77/nix-config). You three have my sincerest gratitude! And of course, I am also very grateful to everyone in involved in the development and ecosystem of Nix, NixOS, Home-Manager, and all of the dependencies in the repo (such as NeoVim, Blender, Krita, Kitty, and many more). You people rock! <3
