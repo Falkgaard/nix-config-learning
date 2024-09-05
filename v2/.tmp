@@ -1,0 +1,294 @@
+# ./libraries/support.nix
+
+
+# Creates an inverted version of a boolean predicate function.
+invert = predicate: x:
+   !predicate(x);
+
+
+# Turns a list into a multi-line string with one invented element per line.
+toIndentedVerticalListString = list:
+   builtins.foldl' (x: y: x + "\t" + (builtins.toString y) + "\n") "" list;
+
+
+# Filters out all invalid elements in a list with a validation predicate.
+allInvalid = inputList: validationPredicate:
+   builtins.filter (invert validationPredicate) inputList;
+
+
+isSubset = potentialSupersetList: potentialSubsetList:
+   (lib.lists.intersectLists potentialSupersetList potentialSubsetList) == potentialSubsetList;
+
+
+# Lists all of the invalid elements in `testList` (w.r.t. `validElementsList`).
+#    If `testList` is a strict subset of `validElementsList` an empty list is returned.
+listInvalidElements = validElementsList: testList:
+   lib.lists.subtractLists (lib.lists.intersectLists validElementsList testList) testList;
+
+
+# Predicate to check whether a file name-type pair is a valid nix config file.
+#    The two parameters should be strings and have been chosen for compatibility
+#    with the results of calling `lib.filterAttrs` on the output of `builtins.readDir`.
+#    Only accepts case-sensitive alphanumeric names (plus dashes and underscores) that begin with a letter.
+isNixFile = fileName: fileType:
+   (fileType == "regular") && ((builtins.match "(.*.nix)" fileName) != null);
+
+isValidName = name:
+   (builtins.match "([a-zA-Z]+[a-zA-Z0-9|_|-]*)" name) != null;
+
+isValidHostName = isValidName;
+
+isValidUserName = isValidName;
+
+# Returns a list of all sub-directory names in path (non-recursive).
+listSubdirs = dirPath:
+   lib.attrNames (
+      lib.filterAttrs
+         (_: type: type == "directory")  # predicate
+         (builtins.readDir dirPath)      # file-type map (content of dir)
+   );
+
+# Returns a list of all sub-directory names in path (non-recursive).
+listNixFiles = dirPath:
+   lib.attrNames (
+      lib.filterAttrs
+         isNixFile                   # predicate
+         (builtins.readDir dirPath)  # file-type map (content of dir)
+   );
+
+# Removes the `.nix` extension from a valid nix file.
+#     Will produce an error if `filename` does not satisfy `isNixFile filename "regular"`!
+stripNixExt = fileName:
+   let
+      result = builtins.match "(.*).nix" fileName
+   in
+      if (builtins.length result == 1) then
+         builtins.elemAt result 0
+      else
+         fileName;   # There was no `.nix` at the end to strip.
+
+
+
+#   Description:
+#      Ensures that a list of input is valid (otherwise raises error).
+#   
+#   Arguments:
+#      `inputList`           : The input data list to ensure the validity of.
+#      `validationPredicate` : The validation predicate.
+#      `errorMsg`            : The error message to raise if any names are invalid.
+#   
+#   Result:
+#      Returns the input list if all elements are valid.
+#      Otherwise it throws an error and lists all invalid elements.
+#
+ensureAllValid = inputList: validationPredicate: errorMsg:
+   if (builtins.all validationPredicate inputList) then
+      inputList # OK!
+   else throw errorMsg + "\nInvalid element(s):\n"
+      + toIndentedVerticalListString (allInvalid inputList validationPredicate);
+
+
+
+#   Description:
+#      Ensures that a list of host names is valid (otherwise raises error).
+#   
+#   Arguments:
+#      `hostNames` : the host name input list to ensure the validity of.
+#   
+#   Result:
+#      Returns the input list of host names if all host names are valid.
+#      Otherwise it throws an error and lists all invalid host names.
+#
+ensureAllValidHostNames = hostNames:
+   ensureAllValid hostNames isValidHostName "Invalid host name in ./hosts!";
+
+
+
+#   Description:
+#      Ensures that a list of user names is valid (otherwise raises error).
+#   jk
+#   Arguments:
+#      `userNames` : The user name input list to ensure the validity of.
+#   
+#   Result:
+#      Returns the input list of user names if all user names are valid.
+#      Otherwise it throws an error and lists all invalid user names.
+#
+ensureValidUserNames = userNames:
+   ensureAllValid userNames isValidUserName "Invalid user name in ./users!";
+
+
+
+
+
+# TODO: Elsewhere... myCfg.nix?
+{ supportLib, lib, ... }:
+let
+   # These will need to be validated below.
+   rawHostList = listSubdirs ./hosts);
+   rawUserList = builtins.map stripNixExt (listNixFiles ./users);
+in {
+   # Transform into valid attributes (or raise descriptive error):
+   hostList    = ensureAllValidHostNames rawHostList;
+   userList    = ensureAllValidUserNames rawUserList;
+   hostUserMap = lib.attrsets.genAttrs
+      hostList
+      (host:
+         let
+            rawHostUserList = import ./hosts/${host}/users.nix; # Needs to be validated below.
+            # TODO: if `rawHostUserList` isn't a list of strings, throw error.
+         in
+            ensureAllValidUsers userList rawHostUserList; # TODO: implement function
+      );
+}
+
+
+
+
+
+
+# ./hosts/X/info.nix
+{...}:
+{
+   role        = "default";                                     # Feel free to edit.
+   system      = "x86_64-linux";                                # Feel free to edit.
+   description = "My personal laptop."                          # Feel free to edit.
+   
+   hostname    = builtins.baseNameOf (builtins.toString ./.);   # Do not edit.
+   users       = import ./users.nix;                            # Do not edit (edit the file instead).
+}
+
+
+
+
+{ myCfg, /*whatever else is needed*/, ... }:
+let
+   mkSystemCfgs = ...;
+   mkHomeCfgs   = ...;
+in {
+   nixosConfigurations = mkSystemCfgs;
+   homeConfigurations  = mkHomeCfgs;
+}
+
+
+
+
+
+
+# TODO: Make HM an opt-in profile or flag?
+
+
+
+
+
+
+
+# TODO: systemRoleList?
+
+
+
+# ./hosts/HOST/users.nix
+[
+   "falk"
+   "mom"
+   "guest"
+]
+
+
+listInvalidElements userList 
+
+
+
+
+
+
+
+Structure:
+
+./hosts/laptop
+./hosts/desktop
+
+./users/falk.nix
+./users/mom.nix
+./users/guest.nix
+
+
+#inside flake.nix's `outputs = inputs@{ self, nixpkgs, home-manager, systems, ...} :
+
+mkSystem = { host, users, system ? "x86_64-linux" }:
+   nixosConfigurations.${host} = lib.nixosSystem {
+      system      = system;
+      specialArgs = { inherit inputs outputs; };
+      modules     = [ ./hosts/${host} ] ++ (map (user: ./users/${user}.nix) users);
+   };
+
+
+
+nixosConfigurations = mkSystems [
+   {
+      host  = "laptop";
+      users = [ "falk" "guest" ];
+   }
+   
+   {
+      host  = "desktop";
+      users = [ "falk" "mom" "guest" ];
+   }
+];
+
+
+homeConfigurations = mkHomes [
+   
+];
+
+
+
+[
+   {
+      host  =  "laptop";
+      users = [ "falk" "guest" ];
+   }
+];
+
+
+# Every host will have its own module directory in hosts with these files:
+nix-cfg/hosts/laptop/default.nix                # configuration.nix
+nix-cfg/hosts/laptop/hardware-configuration.nix
+nix-cfg/hosts/laptop/users.nix                  # just a string list of user names on the host machine
+
+# Every user will have it's own .nix file in users:
+nix-cfg/users/falk.nix
+nix-cfg/users/mom.nix
+nix-cfg/users/guest.nix
+
+# in ./nix-cfg/flake.nix I want to do something like:
+
+for every HOST in ./nix-cfg/hosts,
+nixosConfigurations.HOST = lib.nixosSystem {
+   system      = HOST.system;
+   specialArgs = { inherit inputs outputs; };
+   modules     = [
+      hosts/HOST
+      users/USER.nix
+}
+
+
+let
+   host-list = lib.attrFilter (builtins.readDir ./hosts/.)
+in {
+
+}
+
+
+host-list = 
+
+
+
+
+
+
+
+# should result in:
+#    import /hosts/${host}   # a host configuration directory containing default.nx & hardware-configuration.nix
+#    forEachUser users (user: import /users/${user}.nix)
+
