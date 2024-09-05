@@ -1,3 +1,7 @@
+# Brief
+
+This repo represents my [NixOS](https://nixos.org/) + [Nix Flake](https://nixos.wiki/wiki/Flakes) + [Home Manager](https://home-manager.dev) setup and contains the host configurations for my machines, their system configurations, their users, their user configurations (such as dot files) as well as user-host pair configurations. The goal of this is to have a centralized repository that will allow me to manage all of their configurations (making alterations to existing configurations, adding new hosts or users, tracking configuration histories, etc) as well as to easily and deterministically reproduce such systems. A lot of user state won't be stored here, but at some point I intend to configure things to have automated backups and dedicated remote storage of the more important files in order to make it easy to coordinate access across devices.
+
 # General structure
 
 ## [`./flake.nix`](flake.nix)
