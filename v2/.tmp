@@ -31,7 +31,7 @@ listInvalidElements = validElementsList: testList:
 #    with the results of calling `lib.filterAttrs` on the output of `builtins.readDir`.
 #    Only accepts case-sensitive alphanumeric names (plus dashes and underscores) that begin with a letter.
 isNixFile = fileName: fileType:
-   (fileType == "regular") && ((builtins.match "(.*.nix)" fileName) != null);
+   (fileType == "regular") && ((builtins.match "(.*[.]nix)" fileName) != null);
 
 isValidName = name:
    (builtins.match "([a-zA-Z]+[a-zA-Z0-9|_|-]*)" name) != null;
